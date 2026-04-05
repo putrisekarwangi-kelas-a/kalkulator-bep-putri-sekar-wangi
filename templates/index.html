@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator BEP</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #38bdf8);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 520px;
+            background-color: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            padding: 30px;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #1e3a8a;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            background-color: #f8fafc;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.02);
+        }
+
+        .result {
+            margin-top: 24px;
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border-left: 5px solid #0284c7;
+            padding: 16px;
+            border-radius: 12px;
+            color: #075985;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.15);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-group button {
+            flex: 2;
+        }
+
+        .reset-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px;
+            text-decoration: none;
+            border-radius: 10px;
+            background-color: #cbd5e1;
+            color: #334155;
+            transition: 0.2s;
+        }
+
+        .reset-btn:hover {
+            background-color: #94a3b8;
+            transform: scale(1.02);
+        }
+
+        .error {
+            margin-top: 24px;
+            background-color: #fef2f2;
+            border-left: 5px solid #ef4444;
+            padding: 16px;
+            border-radius: 10px;
+            color: #991b1b;
+        }
+
+        .formula {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #475569;
+            background-color: #f8fafc;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>📊 Kalkulator BEP</h1>
+        <p class="subtitle">Hitung Break Even Point (titik impas) dalam satuan unit</p>
+
+        <form method="POST">
+            <label for="biaya_tetap">Biaya Tetap</label>
+            <input type="number" step="any" name="biaya_tetap" placeholder="Contoh: 1000000" value="{{ biaya_tetap }}" required>
+            
+            <label for="harga_jual">Harga Jual per Unit</label>
+            <input type="number" step="any" name="harga_jual" placeholder="Contoh: 50000" value="{{ harga_jual }}" required>
+
+            <label for="biaya_variabel">Biaya Variabel per Unit</label>
+            <input type="number" step="any" name="biaya_variabel" placeholder="Contoh: 30000" value="{{ biaya_variabel }}" required>
+
+    <div class="button-group">
+            <button type="submit">Hitung Sekarang</button>
+            <a href="/" class="reset-btn">Reset</a>
+    </div>
+
+        </form>
+
+        <div class="formula">
+            <strong>Rumus:</strong><br>
+            BEP = Biaya Tetap / (Harga Jual per Unit - Biaya Variabel per Unit)
+            <strong>Penjelasan:</strong><br>
+            BEP (Break Even Point) adalah titik di mana total pendapatan sama dengan total biaya, sehingga tidak ada keuntungan maupun kerugian.
+        </div>
+
+        {% if hasil is not none %}
+            <div class="result">
+                <strong>📊 Hasil BEP:</strong> {{ hasil | round(2) }} unit<br>
+                <small>Minimal penjualan untuk mencapai titik impas.</small>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        <p class="footer-text">© Kalkulator BEP | Sistem Perhitungan Titik Impas</p>
+    </div>
+
+</body>
+</html>
