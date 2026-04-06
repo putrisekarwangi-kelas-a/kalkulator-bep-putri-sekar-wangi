@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator BEP</title>
@@ -11,7 +12,7 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #0f172a, #1e3a8a, #38bdf8);
             min-height: 100vh;
             display: flex;
@@ -25,11 +26,19 @@
             max-width: 520px;
             background-color: white;
             border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             padding: 30px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            transform: translateY(-3px);
         }
 
         h1 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
             margin-top: 0;
             margin-bottom: 10px;
             text-align: center;
@@ -41,6 +50,7 @@
             color: #475569;
             margin-bottom: 25px;
             font-size: 14px;
+            font-weight: 300;
         }
 
         label {
@@ -49,6 +59,7 @@
             margin-top: 16px;
             font-weight: bold;
             color: #334155;
+            font-weight: 500;
         }
 
         input {
@@ -62,6 +73,7 @@
         }
 
         input:focus {
+            outline: none;
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
             background-color: #f8fafc;
@@ -104,6 +116,28 @@
 
         .button-group button {
             flex: 2;
+        }
+
+    .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+    .header img {
+            width: 60px;
+            height: auto;
+            filter: saturate(0.9);
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .header img:hover {
+            filter: saturate(1.2);
+            transform: scale(1.1);
         }
 
         .reset-btn {
@@ -152,7 +186,10 @@
 </head>
 <body>
     <div class="card">
-        <h1>📊 Kalkulator BEP</h1>
+        <div class="header">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <h1>Kalkulator BEP</h1>
+        </div>
         <p class="subtitle">Hitung Break Even Point (titik impas) dalam satuan unit</p>
 
         <form method="POST">
